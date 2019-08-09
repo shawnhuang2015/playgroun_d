@@ -38,8 +38,8 @@
     let N = str.length;
     let arr = [];
 
-    if (k <= 0) {
-      return [''];
+    if (k === 1) {
+      return str.split('');
     }
 
     for (let i = 0; i < N - k + 1; i++) {
@@ -60,8 +60,8 @@
   // let p = permutation(s);
   // console.log(p.length, p);
 
-  // let kc = k_combination(s, 3);
-  // console.log(kc.length, kc);
+  let kc = k_combination(s, 3);
+  console.log(kc.length, kc);
 
   let c = combination(s);
   let result = [];
@@ -76,7 +76,7 @@
       for (let k = 0; k < p.length; ++k) {
         if (set.has(p[k])) {
           console.log(p[k]);
-        } else{
+        } else {
           set.add(p[k]);
         }
 
@@ -85,6 +85,6 @@
     }
   }
 
-  console.log(result);
+  // console.log(result);
   console.log('done');
 })();
