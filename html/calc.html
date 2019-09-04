@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <p id="demo"></p>
+
+    <p>
+      A function is triggered when the button is clicked. The function outputs
+      some text in a p element with id="demo".
+    </p>
+  </body>
+
+  <script>
+    class test {
+      constructor() {
+        this.status = 'input';
+        this.result = 0;
+        this.current = 0;
+
+        this.update();
+      }
+
+      keyPress(v) {
+        switch (v) {
+          case '+':
+            this.result += this.current;
+            this.current = 0;
+            this.status = 'continue';
+            break;
+          case '=':
+            this.result += this.current;
+            this.current = 0;
+            this.status = 'display';
+            break;
+          default:
+            if (this.status === 'input') {
+              this.current = this.current * 10 + v;
+            } else if (this.status === 'continue') {
+              this.status = 'input';
+              this.current = v;
+            } else if (this.status === 'display') {
+              this.result = 0;
+              this.current = v;
+              this.status = 'input';
+            }
+            break;
+        }
+
+        this.update();
+      }
+
+      update() {
+        let t;
+
+        switch (this.status) {
+          case 'input':
+            t = this.current;
+            break;
+          case 'continue':a
+          case 'display':
+            t = this.result;
+            break;
+        }
+
+        let demo = document.querySelector('#demo');
+        demo.textContent = t;
+      }
+    }
+
+    let a = new test();
+
+    let nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let N = nums.length;
+
+    for (let i = 0; i < N; i++) {
+      let button = document.createElement('button');
+      button.addEventListener('click', () => {
+        a.keyPress(i);
+      });
+      button.textContent = i;
+      document.querySelector('body').appendChild(button);
+    }
+
+    document.querySelector('body').appendChild(document.createElement('br'));
+    document.querySelector('body').appendChild(document.createElement('br'));
+    document.querySelector('body').appendChild(document.createElement('br'));
+
+    ['+', '='].forEach((v) => {
+      let button = document.createElement('button');
+      button.addEventListener('click', () => {
+        a.keyPress(v);
+      });
+      button.textContent = v;
+      document.querySelector('body').appendChild(button);
+    });
+  </script>
+</html>
